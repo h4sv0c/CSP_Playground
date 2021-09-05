@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>CSP Playgorund</title>
+	</head>
+
+	<body>
+		<h1>CSP Playground</h1>
+		<form action="{{url_for('playground')}}" method="GET" >
+			<div>
+				<p>CSP Header</p>
+				<textarea name="csp_header" rows="4" cols="40" ></textarea>
+			</div>
+
+			<div>
+				<p>XSS payload</p>
+				<input type="text" name="payload" value="<script>alert(1)</script>"/>
+			</div>
+
+			<div>
+				<br>
+				<input type="submit" value="submit">
+			</div>
+		</form>
+		
+		<br>
+		<br>
+		
+		<div>
+			Content-Securiy-Policy: {{csp}}
+		</div>
+		
+		<br>
+		<br>
+		<br>
+		
+		<div>
+			<p>XSS is here</p>
+			{% autoescape false %}
+			{{payload}}
+			{% endautoescape %}
+		</div>
+	</body>
+
+
+
+</html>
